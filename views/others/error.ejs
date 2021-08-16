@@ -3,6 +3,8 @@
     <div class="card-header">Something went wrong</div>
     <div class="card-body">
         <h5 class="card-title"><%= err.name %></h5>
-        <p class="card-text"><%= err.stack %> </p>
+        <% if (process.env.NODE_ENV !== "prouction") { %>
+            <p class="card-text"><%= err.stack %> </p>
+        <% } %>
     </div>
 </div>
