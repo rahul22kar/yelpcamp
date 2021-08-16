@@ -1,0 +1,30 @@
+<% layout('boilerplate') %>
+<div class="row justify-content-center">
+    <div class="col-12 col-xl-6">
+        <h2>EDIT CAMPGROUND</h2>
+        <form class="needs-validation" action="/camp/edit/<%= campground._id %>?_method=PATCH" method="POST" novalidate>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="campground[name]" value="<%= campground.name %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" class="form-control" id="location" name="campground[location]" value="<%= campground.location %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" name="campground[price]" value="<%= campground.price %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="imageUrl" class="form-label">Image URL</label>
+                <input type="url" class="form-control" id="imageUrl" name="campground[imageUrl]" value="<%= campground.imageUrl %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea rows="4" class="form-control" id="description" name="campground[description]" required><%= campground.description %></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary m-1">Save</button>
+            <a href="/camp" class="btn btn-danger m-1">Cancel</a>
+        </form>
+    </div>
+</div>

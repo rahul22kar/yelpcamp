@@ -1,0 +1,52 @@
+<% layout('boilerplate') %>
+<div class="row justify-content-between">
+    <div class="col-md-12 col-lg-6">
+        <div class="card m-1">
+        <img src=<%= result.imageUrl %>  class="card-img-top" alt="Camp Image">
+        <div class="card-body">
+            <h5 class="card-title"><%= result.name %> </h5>
+            <p class="card-text"><%= result.description %> </p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-muted"><%= result.location%></li>
+              <li class="list-group-item">Submitted by <%= result.author.username%></li>
+              <li class="list-group-item">₹<%= result.price%>/night</li>
+          </ul>
+          <div class="card-footer text-muted m-1">
+            2 days ago
+          </div>
+            <% if (result.author.equals(currentUser._id)) { %>
+            <form action="/camp/delete/<%=result._id%>?_method=DELETE" method="POST">
+                <a href="/camp/edit/<%=result._id%>" class="btn btn-primary m-1">Edit</a>
+                <button type="submit" class="btn btn-danger m-1">Delete</button>
+            </form>
+            <% } %>
+        </div>
+        </div>
+    </div>
+  <div class="col-md-12 col-lg-5 m-1">
+      <%- include('../partials/reviewForm') %> 
+      <% if (result.reviews.length > 0) { %>
+        <% result.reviews.forEach(review => { %>
+          <div class="card m-1">
+              <div class="card-body">
+                  <p class="starability-result" data-rating="<%= review.rating %>">
+                    Rated <%= review.rating %> stars
+                  </p>
+                  <p class="card-text"><%= review.text %> </p>
+                  <% if (review.author.equals(currentUser._id)) { %>
+                    <form action="/review/delete/<%= review._id %>/<%= result._id %>?_method=DELETE" method="POST">
+                      <button class="btn btn-danger">Delete</button>
+                    </form>
+                  <% } %>
+              </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+          <div class="card">
+              <div class="card-body">
+                  <h5 class="card-title">No reviews yet!</h5>
+              </div>
+          </div>
+      <% } %> 
+  </div>
+</div>

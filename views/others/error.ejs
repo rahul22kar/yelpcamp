@@ -1,0 +1,8 @@
+<% layout('boilerplate') %> 
+<div class="card text-white bg-danger mb-3">
+    <div class="card-header">Something went wrong</div>
+    <div class="card-body">
+        <h5 class="card-title"><%= err.name %></h5>
+        <p class="card-text"><%= err.stack %> </p>
+    </div>
+</div>

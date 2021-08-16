@@ -1,0 +1,42 @@
+<% layout('boilerplate') %>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.4.0/mapbox-gl.css' rel='stylesheet'/>
+<h1>Campgrounds</h1>
+<div id='map' style='height: 300px;'></div>
+<% result.forEach(camp=> { %>
+    <div class="card m-4">
+        <div class="row g-0">
+            <div class="col-12 col-xl-4">
+                <a href="/camp/<%= camp._id %>">
+                    <img src=<%=camp.imageUrl %> class="img-fluid rounded-start" alt="Camp Image">
+                </a>
+            </div>
+            <div class="col-12 col-xl-8">
+                <div class="card-body">
+                    <h5 class="card-title"><%= camp.name %> </h5>
+                    <p class="card-text"><%= camp.description %></p>
+                    <p class="card-text">
+                        <small class="text-muted"><%= camp.location%></small>
+                    </p>
+                    <a class="btn btn-primary" href="/camp/<%=camp._id%>">View <%=camp.name%></a>
+                </div>
+            </div>
+        </div>
+    </div>
+<% }) %>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.4.0/mapbox-gl.js'></script>
+<script>
+    var results = <%-JSON.stringify(result)%>;
+    mapboxgl.accessToken = 'pk.eyJ1IjoicmFodWwyMmthciIsImEiOiJja3NhNzh4aWowMHl2Mm9tcjVvMDg5enprIn0.DS8vojWbApVZjKQ8ez-eSQ';
+    const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/light-v10',
+    center: [78.96, 20.59],
+    zoom: 4
+    });
+    for (camp of results){
+        const marker = new mapboxgl.Marker()
+        .setLngLat(camp.geometry.coordinates)
+        .setPopup(new mapboxgl.Popup({closeButton: false}).setHTML(`<p class='m-1 fs-5'>${camp.name}</p>`))
+        .addTo(map);
+    }
+</script>

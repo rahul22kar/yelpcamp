@@ -1,0 +1,28 @@
+<form class="needs-validation" action="/review/new/<%= result._id %> " method="POST" novalidate>
+    <label for="rating" class="form-label">Rating</label>
+    <fieldset class="starability-basic w-100">
+        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+
+        <input type="radio" id="rate1" name="review[rating]" value="1" />
+        <label for="rate1">1 star.</label>
+
+        <input type="radio" id="rate2" name="review[rating]" value="2" />
+        <label for="rate2">2 stars.</label>
+
+        <input type="radio" id="rate3" name="review[rating]" value="3" />
+        <label for="rate3">3 stars.</label>
+
+        <input type="radio" id="rate4" name="review[rating]" value="4" />
+        <label for="rate4">4 stars.</label>
+
+        <input type="radio" id="rate5" name="review[rating]" value="5" />
+        <label for="rate5">5 stars.</label>
+
+        <span class="starability-focus-ring"></span>
+    </fieldset>
+    <div class="mb-3">
+        <label for="text" class="form-label">Review</label>
+        <textarea rows="4" class="form-control" id="text" name="review[text]" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary m-1 mb-4">Submit</button>
+</form>
